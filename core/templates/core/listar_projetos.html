@@ -1,0 +1,18 @@
+<h2>Projetos</h2>
+{% if messages %}
+  {% for message in messages %}
+    <p><strong>{{ message }}</strong></p>
+  {% endfor %}
+{% endif %}
+<a href="{% url 'criar_projeto' %}">Novo Projeto</a>
+<ul>
+  {% for projeto in projetos %}
+    <li>
+      <strong>{{ projeto.nome }}</strong> - {{ projeto.descricao }} ({{ projeto.data_inicio }})
+      <a href="{% url 'editar_projeto' projeto.pk %}">Editar</a>
+      <a href="{% url 'eliminar_projeto' projeto.pk %}">Eliminar</a>
+    </li>
+  {% empty %}
+    <li>Nenhum projeto registado.</li>
+  {% endfor %}
+</ul>
