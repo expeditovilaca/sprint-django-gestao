@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>Tarefas Cadastradas</h2>
+{% if messages %}
+  {% for message in messages %}
+    <p><strong>{{ message }}</strong></p>
+  {% endfor %}
+{% endif %}
+<a href="{% url 'criar_tarefa' %}">+ Nova Tarefa</a>
+<ul>
+  {% for tarefa in tarefas %}
+    <li>
+      <strong>{{ tarefa.titulo }}</strong> - Projeto: {{ tarefa.projeto.nome }} | Prioridade: {{ tarefa.get_prioridade_display }} | Concluída: {{ tarefa.concluido }}
+      <a href="{% url 'editar_tarefa' tarefa.pk %}">Editar</a> |
+      <a href="{% url 'eliminar_tarefa' tarefa.pk %}">Excluir</a>
+    </li>
+  {% empty %}
+    <li>Nenhuma tarefa cadastrada.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
