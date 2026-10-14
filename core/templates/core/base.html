@@ -1,18 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Projetos e Tarefas</title>
+    <!-- Liga o teu único ficheiro CSS estático -->
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
 </head>
 <body>
+
     <nav>
-        <a href="{% url 'listar_projetos' %}">Projetos</a> | 
-        <a href="{% url 'listar_tarefas' %}">Tarefas</a>
+        <div class="logo">
+            <a href="{% url 'listar_projetos' %}">🚀 Gestor de Projetos</a>
+        </div>
+        <div class="links">
+            <a href="{% url 'listar_projetos' %}">Projetos</a>
+            <a href="{% url 'listar_tarefas' %}">Tarefas</a>
+        </div>
     </nav>
-    <hr>
-    <div>
+
+    <div class="container">
         {% block content %}
         {% endblock %}
     </div>
+
 </body>
 </html>

@@ -1,21 +1,32 @@
 {% extends 'core/base.html' %}
+
 {% block content %}
-<h2>Projetos Cadastrados</h2>
+<div class="header-bar">
+    <h2>Projetos</h2>
+    <a href="{% url 'criar_projeto' %}" class="btn btn-success">+ Novo Projeto</a>
+</div>
+
 {% if messages %}
   {% for message in messages %}
-    <p><strong>{{ message }}</strong></p>
+    <div class="alert">{{ message }}</div>
   {% endfor %}
 {% endif %}
-<a href="{% url 'criar_projeto' %}">+ Novo Projeto</a>
-<ul>
+
+<div class="cards-grid">
   {% for projeto in projetos %}
-    <li>
-      <strong>{{ projeto.nome }}</strong> - {{ projeto.descricao }} ({{ projeto.data_inicio }})
-      <a href="{% url 'editar_projeto' projeto.pk %}">Editar</a> |
-      <a href="{% url 'eliminar_projeto' projeto.pk %}">Excluir</a>
-    </li>
+    <div class="card">
+      <div>
+        <h3>{{ projeto.nome }}</h3>
+        <p>{{ projeto.descricao }}</p>
+        <p><strong>Início:</strong> {{ projeto.data_inicio }}</p>
+      </div>
+      <div class="card-actions">
+        <a href="{% url 'editar_projeto' projeto.pk %}" class="btn btn-primary btn-sm">Editar</a>
+        <a href="{% url 'eliminar_projeto' projeto.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+      </div>
+    </div>
   {% empty %}
-    <li>Nenhum projeto cadastrado.</li>
+    <p>Nenhum projeto cadastrado.</p>
   {% endfor %}
-</ul>
+</div>
 {% endblock %}
